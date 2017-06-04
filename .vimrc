@@ -17,6 +17,9 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-rails'
 Plugin 'Yggdroot/indentLine'
+Plugin 'tpope/vim-endwise'
+Plugin 'mileszs/ack.vim'
+Plugin 'tpope/vim-commentary'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -59,11 +62,17 @@ set t_Co=256
 "hide buffers when not displayed
 set hidden
 
-" red column at 80 characters
-set colorcolumn=80
+" resizing
+nnoremap <C-w>> 10<C-w>>
+nnoremap <C-w>< 10<C-w><
+nnoremap <C-w>+ 10<C-w>+
+nnoremap <C-w>- 10<C-w>
 
 " load NERDTree with ctrl+n
 map <C-n> :NERDTreeToggle<CR>
+
+" open NERDTreeFind with ctrl+b
+map <C-b> :NERDTreeFind<CR>
 
 " ignore node_modules with ctrl+p
 set wildignore+=*/node_modules/*,*/deps/*
