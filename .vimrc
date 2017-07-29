@@ -11,15 +11,17 @@ Plugin 'VundleVim/Vundle.vim'
 " List of Plugins installed starts here
 Plugin 'tpope/vim-sensible'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-rails'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-endwise'
-Plugin 'mileszs/ack.vim'
+Plugin 'BurntSushi/ripgrep'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -71,11 +73,28 @@ nnoremap <C-w>- 10<C-w>
 " load NERDTree with ctrl+n
 map <C-n> :NERDTreeToggle<CR>
 
-" open NERDTreeFind with ctrl+b
-map <C-b> :NERDTreeFind<CR>
+" load NERDTreeiFind with ctrl+m
+map <C-m> :NERDTreeFind<CR>
 
 " ignore node_modules with ctrl+p
 set wildignore+=*/node_modules/*,*/deps/*
 
-" Allow ctrl+p to work with Shopify lol
-let g:ctrlp_max_files = 50000
+" indent line customization
+set conceallevel=1
+let g:indentLine_conceallevel=1
+let g:indentLine_char = '¦'
+let g:indentLine_color_term = 239
+
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+map <C-p> :Files<CR>
