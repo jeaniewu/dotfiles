@@ -22,6 +22,7 @@ Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -58,6 +59,9 @@ set expandtab
 "turn on syntax highlighting
 syntax on
 
+" escape with jj
+inoremap jj <Esc>
+
 "tell the term has 256 colors
 set t_Co=256
 
@@ -70,11 +74,17 @@ nnoremap <C-w>< 10<C-w><
 nnoremap <C-w>+ 10<C-w>+
 nnoremap <C-w>- 10<C-w>
 
-" load NERDTree with ctrl+n
-map <C-n> :NERDTreeToggle<CR>
+" run GoBuild with ctrl+b
+map <C-b> :GoBuild<CR>
 
-" load NERDTreeiFind with ctrl+m
-map <C-m> :NERDTreeFind<CR>
+" run GoRun with ctrl+n
+map <C-n> :GoRun<CR>
+
+" run GoTest with ctrl+t
+map <C-m> :GoTest<CR>
+
+" run NerdTreeToggle with ctrl+m
+map <C-l> :NERDTreeToggle<CR>
 
 " ignore node_modules with ctrl+p
 set wildignore+=*/node_modules/*,*/deps/*
@@ -98,3 +108,7 @@ let g:indentLine_color_term = 239
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 
 map <C-p> :Files<CR>
+
+" easymotion
+map ff <Leader><Leader>w
+
